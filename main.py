@@ -19,19 +19,32 @@ class MainWindow(Ui_MainWindow):
         sys.exit(self.app.exec())
 
     def send_all_messages(self):
+        if (self.excel_file is None or self.image_file is None) or (self.excel_file == '' or self.image_file == ''):
+            if self.excel_file is None or self.excel_file == '':
+                self.choice_file.setText('Вы не выбрали excel файл')
+
+            if self.image_file is None or self.image_file == '':
+                self.choice_image.setText('Вы не выбрали картину')
+
+            return 0
+
         phone_numbers = []
 
         wb = load_workbook(self.excel_file)
         ws = wb[wb.sheetnames[0]]
         for row in ws.values:
             try:
-                int(row[0])
+                int(row[self.spinBox.value()])
                 phone_numbers.append(row[0])
             except ValueError:
                 pass
 
+        quantity_phone_number = 0
         for phone_number in phone_numbers:
             start_send_message(phone_number, self.image_file, self.text.toPlainText())
+            quantity_phone_number += 1
+            self.progressBar.setValue(int(quantity_phone_number / (len(phone_numbers)/100)))
+            self.progress_sent_message.setText(f'Отправлено {quantity_phone_number}')
 
     def choice_excel_file(self):
         file, _ = QFileDialog.getOpenFileName(None,

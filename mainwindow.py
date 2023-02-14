@@ -78,4 +78,4 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Выберите exel таблицу и столбик номеров"))
         self.choice_file.setText(_translate("MainWindow", "Выбрать файл"))
         self.send_message.setText(_translate("MainWindow", "Отправить"))
-        self.progress_sent_message.setText(_translate("MainWindow", "Отправдено 0 сообщений"))
+        self.progress_sent_message.setText(_translate("MainWindow", "Отправлено 0"))
