@@ -1,0 +1,5 @@
+config.ini
+my_account.session
+venv/
+.idea
+__pycache__/
